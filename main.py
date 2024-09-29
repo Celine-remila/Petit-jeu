@@ -9,7 +9,7 @@ class Jeu:
         k (int): Un nombre tiré au hasard entre 0 et m.
         n (int): Le nombre maximum d'essais qu'on a à faire.
     Example:
-        >>> j = Jeu(10)
+        >>> j = Jeu(10, 4)
         >>> 0 <= j.k <= 10
         True
     """
@@ -38,29 +38,34 @@ class Jeu:
             k (int): Le nombre proposé par le joueur.
 
         Returns:
-            bool: True si k est égal à k, False sinon.
-
+            bool: True si le joueur a gagné, False sinon.
+  
         Examples:
             >>> j = Jeu(10, 4)
-            >>> j.test(j.k)  # On doit gagner si on propose le bon nombre
-            'Bravo, tu as gagné !'
+            >>> j.test(j.k)  #On doit gagner si on propose le bon nombre
+            Bravo, tu as gagné !
+            True 
         """
-        self.n -=1 #Pour décréme,nter le nombre d'essais
+
         if k < self.k:
             print("Trop petit !")
+            self.n -=1 #Pour décréme,nter le nombre d'essais
             return False
         elif k > self.k:
             print("Trop grand !")
+            self.n -=1 #Pour décréme,nter le nombre d'essais
             return False
         else:
             print("Bravo, tu as gagné !")
             return True
+            
 
     def jouer(self):
         while self.n > 0:
             try:
                 k = int(input("Entre un nombre : "))
                 if self.test(k):
+                    print("Bravo, tu as gagné !")
                     break
             except ValueError:
                 print("Ceci n’est pas un entier !")
