@@ -30,6 +30,11 @@ class Jeu:
         self.m = m
         self.k = random.randint(0, m)
         self.n = n 
+<<<<<<< HEAD
+=======
+        
+        
+>>>>>>> dev
     def test(self, k):
         """
         Comparer le nombre k avec le nombre donné m à deviner.
@@ -49,11 +54,19 @@ class Jeu:
 
         if k < self.k:
             print("Trop petit !")
+<<<<<<< HEAD
             self.n -=1 #Pour décréme,nter le nombre d'essais
             return False
         elif k > self.k:
             print("Trop grand !")
             self.n -=1 #Pour décréme,nter le nombre d'essais
+=======
+            self.n -=1 #Pour décrémenter le nombre d'essais
+            return False
+        elif k > self.k:
+            print("Trop grand !")
+            self.n -=1 #Pour décrémenter le nombre d'essais
+>>>>>>> dev
             return False
         else:
             print("Bravo, tu as gagné !")
