@@ -2,48 +2,50 @@ import random
 
 class Jeu:
     """
-    Classe représentant un jeu de devinette.
+    La Classe représentative du jeu.
 
-    Attributes:
-        m (int): Le nombre maximum pour la devinette.
-        k (int): Un nombre aléatoire entre 0 et m.
-
-    Examples:
+    Attributs:
+        m (int): Le nombre m reçois en paramètre.
+        k (int): Un nombre tiré au hasard entre 0 et m.
+        n (int): Le nombre maximum d'essais qu'on a à faire.
+    Example:
         >>> j = Jeu(10)
         >>> 0 <= j.k <= 10
         True
     """
 
-    def __init__(self, m):
+    def __init__(self, m, n):
         """
         Constructeur de la classe Jeu.
 
-        Args:
-            m (int): Le nombre maximum pour le tirage aléatoire.
-
+        Arguments:
+            m (int): Le nombre pour le tirage aléatoire.
+            n (int): Le nombre maximum d'essais qu'on a à faire.
+   
         Examples:
-            >>> j = Jeu(10)
-            >>> j.m
-            10
+            >>> j = Jeu(10,4)
+            >>> j.n
+            4
         """
         self.m = m
         self.k = random.randint(0, m)
-
+        self.n = n 
     def test(self, k):
         """
-        Compare le nombre k avec le nombre à deviner.
+        Comparer le nombre k avec le nombre donné m à deviner.
 
-        Args:
+        Arguments:
             k (int): Le nombre proposé par le joueur.
 
         Returns:
             bool: True si k est égal à k, False sinon.
 
         Examples:
-            >>> j = Jeu(10)
+            >>> j = Jeu(10, 4)
             >>> j.test(j.k)  # On doit gagner si on propose le bon nombre
             'Bravo, tu as gagné !'
         """
+        self.n -=1 #Pour décréme,nter le nombre d'essais
         if k < self.k:
             print("Trop petit !")
             return False
@@ -55,13 +57,17 @@ class Jeu:
             return True
 
     def jouer(self):
-        """
-        Permet de jouer au jeu en demandant des entrées à l'utilisateur.
-        """
-        while True:
-            k = int(input("Entrez un nombre : "))
-            if self.test(k):
-                break
+        while self.n > 0:
+            try:
+                k = int(input("Entre un nombre : "))
+                if self.test(k):
+                    break
+            except ValueError:
+                print("Ceci n’est pas un entier !")
+        else:
+            print("Tu as perdu !")
+            
+            
 
 if __name__ == '__main__':
     import doctest
